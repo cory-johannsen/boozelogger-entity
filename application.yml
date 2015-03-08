@@ -1,0 +1,12 @@
+server:
+  port: 9000
+
+service_version: 1.0.1
+
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/boozelogger
+    driverClassName: org.postgresql.Driver
+    username: boozelogger
+    password: boozelogger
+

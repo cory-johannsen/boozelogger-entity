@@ -1,0 +1,73 @@
+import java.util.regex.Pattern
+
+buildscript {
+    repositories {
+        maven { url "https://repo.spring.io/libs-release" }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.0.RELEASE")
+        classpath('org.springframework:springloaded:1.2.0.RELEASE')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'boozelogger-entity'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://repo.spring.io/libs-release" }
+    maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
+}
+
+sourceSets.main.output.resourcesDir = sourceSets.main.output.classesDir
+compileJava.dependsOn(processResources)
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-data-rest"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.yaml:snakeyaml:1.13'
+    compile 'com.fasterxml.jackson.core:jackson-databind'
+    compile 'org.postgresql:postgresql:9.3-1102-jdbc41'
+    compile 'org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test:1.0.2.RELEASE'
+    testCompile "junit:junit:4.11"
+
+    runtime 'org.postgresql:postgresql:9.3-1102-jdbc41'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
+task incrementVersion << {
+    println(":incrementVersion - Incrementing Version identifier...")
+    def yamlFile = file("$projectDir/application.yml")
+    def patternVersion = Pattern.compile("version: 1.0.(\\d+)")
+    def yamlText = yamlFile.getText()
+    def matcherVersion = patternVersion.matcher(yamlText)
+    matcherVersion.find()
+    def mVersion = Integer.parseInt(matcherVersion.group(1))
+    def mNextVersion = mVersion + 1
+    def yamlContent = matcherVersion.replaceAll("service_version: 1.0." + mNextVersion)
+    println(":incrementVersion - current version: 1.0." + mVersion);
+    println(":incrementVersion - next version: 1.0." + mNextVersion);
+    yamlFile.write(yamlContent)
+}
+
+task release << {
+    println(":release - Build and Version Increment")
+}
+
+incrementVersion.mustRunAfter build
+release.dependsOn incrementVersion
