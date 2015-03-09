@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name="process")
 public class Process {
 
-    private Integer id;
+    private Long id;
     private String name;
     private List<ProcessStep> steps;
     private Date createdAt;
@@ -24,7 +24,7 @@ public class Process {
         this(null, null, new ArrayList<ProcessStep>(), null);
     }
 
-    public Process(Integer id, String name, List<ProcessStep> steps, Date createdAt) {
+    public Process(Long id, String name, List<ProcessStep> steps, Date createdAt) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
@@ -33,11 +33,11 @@ public class Process {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

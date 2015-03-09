@@ -1,8 +1,7 @@
 package boozelogger.entity.api;
 
-import boozelogger.entity.*;
-import boozelogger.entity.repository.IngredientRepository;
-//import boozelogger.entity.repository.RecipeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.orm.jpa.EntityScan;
@@ -10,11 +9,11 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+//import boozelogger.entity.repository.RecipeRepository;
 
 @Configuration
 @ComponentScan

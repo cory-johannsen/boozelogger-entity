@@ -1,7 +1,9 @@
 package boozelogger.entity;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -21,7 +23,7 @@ public class FinishLogEntry extends LogEntry {
         this(null, null, null, null, null, null, null);
     }
 
-    public FinishLogEntry(Integer id, FinishLog finishLog, Double temperature, String notes, Date createdAt, String flavor, String color) {
+    public FinishLogEntry(Long id, FinishLog finishLog, Double temperature, String notes, Date createdAt, String flavor, String color) {
         super(id, temperature, notes, createdAt);
         this.flavor = flavor;
         this.color = color;

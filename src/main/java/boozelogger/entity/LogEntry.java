@@ -13,7 +13,7 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class LogEntry {
 
-    private Integer id;
+    private Long id;
     private Double temperature;
     private String notes;
     private Date createdAt;
@@ -22,7 +22,7 @@ public abstract class LogEntry {
         this(null, null, null, null);
     }
 
-    protected LogEntry(Integer id, Double temperature, String notes, Date createdAt) {
+    protected LogEntry(Long id, Double temperature, String notes, Date createdAt) {
         this.id = id;
         this.temperature = temperature;
         this.notes = notes;
@@ -31,11 +31,11 @@ public abstract class LogEntry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

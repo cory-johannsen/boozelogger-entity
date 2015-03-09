@@ -12,19 +12,19 @@ import java.util.Date;
 @Table(name="ingredient")
 public class Ingredient {
 
-    private Integer id;
+    private Long id;
     private String name;
     private Date createdAt;
 
     public Ingredient() {
-        this(null, null, null);
+        this(null, null, new Date());
     }
 
     public Ingredient(String name) {
         this(null, name, new Date());
     }
 
-    public Ingredient(Integer id, String name, Date createdAt) {
+    public Ingredient(Long id, String name, Date createdAt) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
@@ -32,11 +32,11 @@ public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

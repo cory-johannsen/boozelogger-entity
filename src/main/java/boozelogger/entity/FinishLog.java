@@ -21,7 +21,7 @@ public class FinishLog extends Log {
         this(null, null, null, null, null, new ArrayList<FinishLogEntry>());
     }
 
-    public FinishLog(Integer id, Finish finish, String notes, Vessel vessel, Date createdAt, List<FinishLogEntry> entries) {
+    public FinishLog(Long id, Finish finish, String notes, Vessel vessel, Date createdAt, List<FinishLogEntry> entries) {
         super(id, notes, vessel, createdAt);
         this.entries = entries;
         this.finish = finish;
@@ -37,8 +37,7 @@ public class FinishLog extends Log {
         this.entries = entries;
     }
 
-    @OneToOne
-    @JoinColumn(name="finish_id")
+    @OneToOne(mappedBy = "finishLog")
     public Finish getFinish() {
         return finish;
     }

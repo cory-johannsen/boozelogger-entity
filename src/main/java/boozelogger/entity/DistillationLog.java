@@ -21,14 +21,13 @@ public class DistillationLog extends Log {
         this(null, null, null, null, null, new ArrayList<DistillationLogEntry>());
     }
 
-    public DistillationLog(Integer id, Distillation distillation, String notes, Vessel vessel, Date createdAt, List<DistillationLogEntry> entries) {
+    public DistillationLog(Long id, Distillation distillation, String notes, Vessel vessel, Date createdAt, List<DistillationLogEntry> entries) {
         super(id, notes, vessel, createdAt);
         this.distillation = distillation;
         this.entries = entries;
     }
 
-    @OneToOne
-    @JoinColumn(name="distillation_id")
+    @OneToOne(mappedBy = "distillationLog")
     public Distillation getDistillation() {
         return distillation;
     }

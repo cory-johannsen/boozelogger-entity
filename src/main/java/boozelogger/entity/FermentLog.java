@@ -21,7 +21,7 @@ public class FermentLog extends Log {
         this(null, null, null, null, new ArrayList<FermentLogEntry>(), null);
     }
 
-    public FermentLog(Integer id, Ferment ferment, String notes, Vessel vessel, List<FermentLogEntry> entries, Date createdAt) {
+    public FermentLog(Long id, Ferment ferment, String notes, Vessel vessel, List<FermentLogEntry> entries, Date createdAt) {
         super(id, notes, vessel, createdAt);
         this.entries = entries;
     }
@@ -36,8 +36,7 @@ public class FermentLog extends Log {
         this.entries = entries;
     }
 
-    @ManyToOne
-    @JoinColumn(name="ferment_id")
+    @OneToOne(mappedBy = "fermentLog")
     public Ferment getFerment() {
         return ferment;
     }

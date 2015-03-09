@@ -13,28 +13,30 @@ import java.util.List;
 @Table(name="ferment")
 public class Ferment {
 
-    private Integer id;
+    private Long id;
     private String name;
     private String description;
     private Recipe recipe;
     private List<Vessel> vessels;
+    private FermentLog fermentLog;
     private Double originalGravity;
     private Double temperature;
     private Date startDate;
     private Date createdAt;
 
     public Ferment() {
-        this(null, null, null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null, null, new Date());
     }
 
-    public Ferment(Integer id, String name, String description, Recipe recipe, List<Vessel> vessels,
-                   Double originalGravity, Double temperature, Date startDate,
+    public Ferment(Long id, String name, String description, Recipe recipe, List<Vessel> vessels,
+                   FermentLog fermentLog, Double originalGravity, Double temperature, Date startDate,
                    Date createdAt) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.recipe = recipe;
         this.vessels = vessels;
+        this.fermentLog = fermentLog;
         this.originalGravity = originalGravity;
         this.temperature = temperature;
         this.startDate = startDate;
@@ -43,11 +45,11 @@ public class Ferment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -91,6 +93,16 @@ public class Ferment {
 
     public void setVessels(List<Vessel> vessels) {
         this.vessels = vessels;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "ferment_log_id")
+    public FermentLog getFermentLog() {
+        return fermentLog;
+    }
+
+    public void setFermentLog(FermentLog fermentLog) {
+        this.fermentLog = fermentLog;
     }
 
     @Column(name="original_gravity", columnDefinition = "numeric")
