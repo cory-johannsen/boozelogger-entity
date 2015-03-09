@@ -1,7 +1,6 @@
 package boozelogger.entity;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 /**
@@ -21,7 +20,7 @@ public class DistillationLogEntry extends LogEntry {
         this(null, null, null, null, null, null, null);
     }
 
-    public DistillationLogEntry(Integer id, Double temperature, String notes, Date createdAt, Double abv, Double volume, UnitOfMeasurement unit) {
+    public DistillationLogEntry(Long id, Double temperature, String notes, Date createdAt, Double abv, Double volume, UnitOfMeasurement unit) {
         super(id, temperature, notes, createdAt);
         this.abv = abv;
         this.volume = volume;

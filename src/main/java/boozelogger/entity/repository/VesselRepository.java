@@ -1,6 +1,5 @@
 package boozelogger.entity.repository;
 
-import boozelogger.entity.Ingredient;
 import boozelogger.entity.Vessel;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;

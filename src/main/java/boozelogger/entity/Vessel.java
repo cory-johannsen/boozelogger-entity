@@ -13,7 +13,7 @@ import java.util.Date;
 @Table(name="vessel")
 public class Vessel {
 
-    private Integer id;
+    private Long id;
     private String name;
     private String description;
     private Double volume;
@@ -24,7 +24,7 @@ public class Vessel {
         this(null, null, null, null, null, null);
     }
 
-    public Vessel(Integer id, String name, String description, Double volume, UnitOfMeasurement unit, Date createdAt) {
+    public Vessel(Long id, String name, String description, Double volume, UnitOfMeasurement unit, Date createdAt) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -36,11 +36,11 @@ public class Vessel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name = "finish")
 public class Finish {
 
-    private Integer id;
+    private Long id;
     private Ferment ferment;
     private Distillation distillation;
     private Double volume;
@@ -27,7 +27,7 @@ public class Finish {
         this(null, null, null, null, null, new ArrayList<Vessel>(), new FinishLog(), new Date());
     }
 
-    public Finish(Integer id, Ferment ferment, Distillation distillation, Double volume, UnitOfMeasurement unit, List<Vessel> vessels, FinishLog finishLog, Date createdAt) {
+    public Finish(Long id, Ferment ferment, Distillation distillation, Double volume, UnitOfMeasurement unit, List<Vessel> vessels, FinishLog finishLog, Date createdAt) {
         this.id = id;
         this.ferment = ferment;
         this.distillation = distillation;
@@ -40,11 +40,11 @@ public class Finish {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,7 +1,6 @@
 package boozelogger.entity;
 
 import javax.persistence.*;
-import java.lang.*;
 
 /**
  * User: cjohannsen
@@ -12,7 +11,7 @@ import java.lang.*;
 @Table(name="process_step")
 public class ProcessStep {
 
-    private Integer id;
+    private Long id;
     private String name;
     private String description;
     private Process process;
@@ -21,7 +20,7 @@ public class ProcessStep {
         this(null, null, null, null);
     }
 
-    public ProcessStep(Integer id, String name, String description, Process process) {
+    public ProcessStep(Long id, String name, String description, Process process) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -30,11 +29,11 @@ public class ProcessStep {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
