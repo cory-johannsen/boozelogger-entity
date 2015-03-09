@@ -38,7 +38,8 @@ dependencies {
     compile 'org.yaml:snakeyaml:1.13'
     compile 'com.fasterxml.jackson.core:jackson-databind'
     compile 'org.postgresql:postgresql:9.3-1102-jdbc41'
-    compile 'org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final'
+    compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
+    compile 'ch.qos.logback:logback-classic:1.1.2'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test:1.0.2.RELEASE'
     testCompile "junit:junit:4.11"

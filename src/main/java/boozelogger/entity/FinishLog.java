@@ -1,9 +1,6 @@
 package boozelogger.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,16 +14,17 @@ import java.util.List;
 @Table(name="finish_log")
 public class FinishLog extends Log {
 
-
+    private Finish finish;
     private List<FinishLogEntry> entries;
 
     public FinishLog() {
-        this(null, null, null, null, new ArrayList<FinishLogEntry>());
+        this(null, null, null, null, null, new ArrayList<FinishLogEntry>());
     }
 
-    public FinishLog(Integer id, String notes, Vessel vessel, Date createdAt, List<FinishLogEntry> entries) {
+    public FinishLog(Integer id, Finish finish, String notes, Vessel vessel, Date createdAt, List<FinishLogEntry> entries) {
         super(id, notes, vessel, createdAt);
         this.entries = entries;
+        this.finish = finish;
     }
 
     @OneToMany
@@ -37,5 +35,15 @@ public class FinishLog extends Log {
 
     public void setEntries(List<FinishLogEntry> entries) {
         this.entries = entries;
+    }
+
+    @OneToOne
+    @JoinColumn(name="finish_id")
+    public Finish getFinish() {
+        return finish;
+    }
+
+    public void setFinish(Finish finish) {
+        this.finish = finish;
     }
 }

@@ -14,13 +14,14 @@ import java.util.List;
 @Table(name="ferment_log")
 public class FermentLog extends Log {
 
+    private Ferment ferment;
     private List<FermentLogEntry> entries;
 
     public FermentLog() {
-        this(null, null, null, null, new ArrayList<FermentLogEntry>());
+        this(null, null, null, null, new ArrayList<FermentLogEntry>(), null);
     }
 
-    public FermentLog(Integer id, String notes, Vessel vessel, Date createdAt, List<FermentLogEntry> entries) {
+    public FermentLog(Integer id, Ferment ferment, String notes, Vessel vessel, List<FermentLogEntry> entries, Date createdAt) {
         super(id, notes, vessel, createdAt);
         this.entries = entries;
     }
@@ -33,5 +34,15 @@ public class FermentLog extends Log {
 
     public void setEntries(List<FermentLogEntry> entries) {
         this.entries = entries;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="ferment_id")
+    public Ferment getFerment() {
+        return ferment;
+    }
+
+    public void setFerment(Ferment ferment) {
+        this.ferment = ferment;
     }
 }

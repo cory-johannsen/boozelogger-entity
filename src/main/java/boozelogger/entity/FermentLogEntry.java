@@ -13,13 +13,14 @@ import java.util.Date;
 @Table(name = "ferment_log_entry")
 public class FermentLogEntry extends LogEntry {
 
+    private FermentLog fermentLog;
     private Double specificGravity;
 
     public FermentLogEntry() {
-        this(null, null, null, null, null);
+        this(null, null, null, null, null, new Date());
     }
 
-    public FermentLogEntry(Integer id, Double temperature, String notes, Date createdAt, Double specificGravity) {
+    public FermentLogEntry(Integer id, FermentLog fermentLog, Double temperature, String notes, Double specificGravity, Date createdAt) {
         super(id, temperature, notes, createdAt);
         this.specificGravity = specificGravity;
     }
@@ -29,7 +30,17 @@ public class FermentLogEntry extends LogEntry {
         return specificGravity;
     }
 
+    @ManyToOne
     public void setSpecificGravity(Double specificGravity) {
         this.specificGravity = specificGravity;
+    }
+
+    @ManyToOne
+    public FermentLog getFermentLog() {
+        return fermentLog;
+    }
+
+    public void setFermentLog(FermentLog fermentLog) {
+        this.fermentLog = fermentLog;
     }
 }

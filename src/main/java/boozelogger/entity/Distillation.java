@@ -1,6 +1,7 @@
 package boozelogger.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,14 +18,17 @@ public class Distillation {
     private Ferment ferment;
     private List<Vessel> vessels;
     private Date createdAt;
+    private DistillationLog distillationLog;
 
     public Distillation() {
+        this(null, null, new ArrayList<Vessel>(), new DistillationLog(), new Date());
     }
 
-    public Distillation(Integer id, Ferment ferment, List<Vessel> vessels, Date createdAt) {
+    public Distillation(Integer id, Ferment ferment, List<Vessel> vessels, DistillationLog distillationLog, Date createdAt) {
         this.id = id;
         this.ferment = ferment;
         this.vessels = vessels;
+        this.distillationLog = distillationLog;
         this.createdAt = createdAt;
     }
     @Id
@@ -53,13 +57,22 @@ public class Distillation {
             joinColumns={ @JoinColumn(name="distillation_id", referencedColumnName="id") },
             inverseJoinColumns={ @JoinColumn(name="vessel_id", referencedColumnName="id") }
     )
-
     public List<Vessel> getVessels() {
         return vessels;
     }
 
     public void setVessels(List<Vessel> vessel) {
         this.vessels = vessel;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "distillation_log_id")
+    public DistillationLog getDistillationLog() {
+        return distillationLog;
+    }
+
+    public void setDistillationLog(DistillationLog distillationLog) {
+        this.distillationLog = distillationLog;
     }
 
     @Temporal(TemporalType.TIMESTAMP)

@@ -13,17 +13,19 @@ import java.util.Date;
 @Table(name = "finish_log_entry")
 public class FinishLogEntry extends LogEntry {
 
+    private FinishLog finishLog;
     private String flavor;
     private String color;
 
     public FinishLogEntry() {
-        this(null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null);
     }
 
-    public FinishLogEntry(Integer id, Double temperature, String notes, Date createdAt, String flavor, String color) {
+    public FinishLogEntry(Integer id, FinishLog finishLog, Double temperature, String notes, Date createdAt, String flavor, String color) {
         super(id, temperature, notes, createdAt);
         this.flavor = flavor;
         this.color = color;
+        this.finishLog = finishLog;
     }
 
     @Column(name="flavor")
@@ -42,5 +44,14 @@ public class FinishLogEntry extends LogEntry {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    @ManyToOne
+    public FinishLog getFinishLog() {
+        return finishLog;
+    }
+
+    public void setFinishLog(FinishLog finishLog) {
+        this.finishLog = finishLog;
     }
 }

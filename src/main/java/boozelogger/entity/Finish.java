@@ -20,19 +20,21 @@ public class Finish {
     private Double volume;
     private UnitOfMeasurement unit;
     private List<Vessel> vessels;
+    private FinishLog finishLog;
     private Date createdAt;
 
     public Finish() {
-        this(null, null, null, null, null, new ArrayList<Vessel>(), null);
+        this(null, null, null, null, null, new ArrayList<Vessel>(), new FinishLog(), new Date());
     }
 
-    public Finish(Integer id, Ferment ferment, Distillation distillation, Double volume, UnitOfMeasurement unit, List<Vessel> vessels, Date createdAt) {
+    public Finish(Integer id, Ferment ferment, Distillation distillation, Double volume, UnitOfMeasurement unit, List<Vessel> vessels, FinishLog finishLog, Date createdAt) {
         this.id = id;
         this.ferment = ferment;
         this.distillation = distillation;
         this.volume = volume;
         this.unit = unit;
         this.vessels = vessels;
+        this.finishLog = finishLog;
         this.createdAt = createdAt;
     }
 
@@ -97,6 +99,16 @@ public class Finish {
 
     public void setUnit(UnitOfMeasurement unit) {
         this.unit = unit;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "finish_log_id")
+    public FinishLog getFinishLog() {
+        return finishLog;
+    }
+
+    public void setFinishLog(FinishLog finishLog) {
+        this.finishLog = finishLog;
     }
 
     @Temporal(TemporalType.TIMESTAMP)

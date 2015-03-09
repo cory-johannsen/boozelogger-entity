@@ -21,7 +21,7 @@ public class Ingredient {
     }
 
     public Ingredient(String name) {
-        this(null, name, null);
+        this(null, name, new Date());
     }
 
     public Ingredient(Integer id, String name, Date createdAt) {

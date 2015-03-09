@@ -2,7 +2,7 @@ package boozelogger.entity.api;
 
 import boozelogger.entity.*;
 import boozelogger.entity.repository.IngredientRepository;
-import boozelogger.entity.repository.RecipeRepository;
+//import boozelogger.entity.repository.RecipeRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.orm.jpa.EntityScan;
@@ -10,10 +10,11 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.List;
 
 @Configuration
 @ComponentScan
@@ -21,6 +22,7 @@ import java.util.List;
 @EnableAutoConfiguration
 @RestController
 public class Application {
+    public static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     private static final EntityManagerFactory INSTANCE =
             Persistence.createEntityManagerFactory("boozelogger");
@@ -29,13 +31,13 @@ public class Application {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(Application.class);
 
-        IngredientRepository ingredientRepository = context.getBean(IngredientRepository.class);
+//        IngredientRepository ingredientRepository = context.getBean(IngredientRepository.class);
 
-        Ingredient maltIngredient = ingredientRepository.save(new Ingredient("2-Row Organic Barley Malt"));
-        Ingredient cornIngredient = ingredientRepository.save(new Ingredient("Flaked Corn"));
-        Ingredient yeastIngredient = ingredientRepository.save(new Ingredient("Distiller's Yeast"));
-        Ingredient nutrientIngredient = ingredientRepository.save(new Ingredient("Yeast Nutrient"));
-        Ingredient lactoIngredient = ingredientRepository.save(new Ingredient("Lactobacillus Pack"));
+//        Ingredient maltIngredient = ingredientRepository.save(new Ingredient("2-Row Organic Barley Malt"));
+//        Ingredient cornIngredient = ingredientRepository.save(new Ingredient("Flaked Corn"));
+//        Ingredient yeastIngredient = ingredientRepository.save(new Ingredient("Distiller's Yeast"));
+//        Ingredient nutrientIngredient = ingredientRepository.save(new Ingredient("Yeast Nutrient"));
+//        Ingredient lactoIngredient = ingredientRepository.save(new Ingredient("Lactobacillus Pack"));
 
 //        RecipeRepository recipeRepository = context.getBean(RecipeRepository.class);
 //        Recipe recipe = new Recipe("Corn Whiskey", RecipeType.WHISKEY_MASH);
