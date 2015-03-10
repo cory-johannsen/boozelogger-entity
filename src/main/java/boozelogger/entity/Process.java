@@ -21,7 +21,7 @@ public class Process {
     private Date createdAt;
 
     public Process() {
-        this(null, null, new ArrayList<ProcessStep>(), null);
+        this(null, null, new ArrayList<ProcessStep>(), new Date());
     }
 
     public Process(Long id, String name, List<ProcessStep> steps, Date createdAt) {
@@ -52,6 +52,7 @@ public class Process {
 
     @OneToMany(fetch=FetchType.EAGER)
     @JoinColumn(name = "process_id")
+    @OrderBy("id ASC")
     public List<ProcessStep> getSteps() {
         return steps;
     }

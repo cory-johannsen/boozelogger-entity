@@ -38,7 +38,6 @@ public class RecipeComponent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     public Long getId() {
         return id;
     }

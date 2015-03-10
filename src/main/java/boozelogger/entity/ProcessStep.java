@@ -1,6 +1,7 @@
 package boozelogger.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * User: cjohannsen
@@ -15,16 +16,18 @@ public class ProcessStep {
     private String name;
     private String description;
     private Process process;
+    private Date createdAt;
 
     public ProcessStep() {
-        this(null, null, null, null);
+        this(null, null, null, null, new Date());
     }
 
-    public ProcessStep(Long id, String name, String description, Process process) {
+    public ProcessStep(Long id, String name, String description, Process process, Date createdAt) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.process = process;
+        this.createdAt = new Date();
     }
 
     @Id
@@ -63,5 +66,15 @@ public class ProcessStep {
 
     public void setProcess(Process process) {
         this.process = process;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="created_at")
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

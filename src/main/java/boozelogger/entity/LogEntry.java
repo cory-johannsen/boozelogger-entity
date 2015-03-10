@@ -19,7 +19,7 @@ public abstract class LogEntry {
     private Date createdAt;
 
     protected LogEntry() {
-        this(null, null, null, null);
+        this(null, null, null, new Date());
     }
 
     protected LogEntry(Long id, Double temperature, String notes, Date createdAt) {
