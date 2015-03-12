@@ -15,18 +15,16 @@ public class ProcessStep {
     private Long id;
     private String name;
     private String description;
-    private Process process;
     private Date createdAt;
 
     public ProcessStep() {
-        this(null, null, null, null, new Date());
+        this(null, null, null, new Date());
     }
 
-    public ProcessStep(Long id, String name, String description, Process process, Date createdAt) {
+    public ProcessStep(Long id, String name, String description, Date createdAt) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.process = process;
         this.createdAt = new Date();
     }
 
@@ -56,16 +54,6 @@ public class ProcessStep {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @ManyToOne
-    @JoinColumn(name="process_id")
-    public Process getProcess() {
-        return process;
-    }
-
-    public void setProcess(Process process) {
-        this.process = process;
     }
 
     @Temporal(TemporalType.TIMESTAMP)
