@@ -21,7 +21,11 @@ public class Process {
     private Date createdAt;
 
     public Process() {
-        this(null, null, new ArrayList<ProcessStep>(), null);
+        this(null, null, new ArrayList<ProcessStep>(), new Date());
+    }
+
+    public Process(String name) {
+        this(null, name, new ArrayList<ProcessStep>(), new Date());
     }
 
     public Process(Long id, String name, List<ProcessStep> steps, Date createdAt) {
@@ -50,8 +54,9 @@ public class Process {
         this.name = name;
     }
 
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
     @JoinColumn(name = "process_id")
+    @OrderBy("id ASC")
     public List<ProcessStep> getSteps() {
         return steps;
     }

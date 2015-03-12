@@ -18,7 +18,7 @@ public abstract class Log {
     private Date createdAt;
 
     public Log() {
-        this(null, null, null, null);
+        this(null, null, null, new Date());
     }
 
     public Log(Long id, String notes, Vessel vessel, Date createdAt) {

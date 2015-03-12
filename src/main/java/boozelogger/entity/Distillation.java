@@ -57,6 +57,7 @@ public class Distillation {
             joinColumns={ @JoinColumn(name="distillation_id", referencedColumnName="id") },
             inverseJoinColumns={ @JoinColumn(name="vessel_id", referencedColumnName="id") }
     )
+    @OrderBy("name")
     public List<Vessel> getVessels() {
         return vessels;
     }

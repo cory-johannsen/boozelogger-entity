@@ -20,15 +20,15 @@ public class Recipe {
     private Process process;
 
     public Recipe() {
-        this(null, null, null, null, new HashSet<RecipeComponent>(), null);
+        this(null, null, null, new Date(), new HashSet<RecipeComponent>(), new Process());
     }
 
     public Recipe(String name, RecipeType recipeType) {
-        this(null, name, recipeType, null, null, null);
+        this(null, name, recipeType, new Date(), new HashSet<RecipeComponent>(), new Process(name));
     }
 
     public Recipe(String name, RecipeType recipeType, Set<RecipeComponent> components, Process process) {
-        this(null, name, recipeType, null, components, process);
+        this(null, name, recipeType, new Date(), components, process);
     }
 
     public Recipe(Long id, String name, RecipeType recipeType, Date createdAt, Set<RecipeComponent> components, Process process) {
@@ -69,7 +69,7 @@ public class Recipe {
         this.createdAt = createdAt;
     }
 
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
     @JoinColumn(name = "recipe_id")
     public Set<RecipeComponent> getComponents() {
         return components;
@@ -80,7 +80,7 @@ public class Recipe {
     }
 
     @Enumerated(EnumType.STRING)
-    @Column(name="type")
+    @Column(name="recipe_type")
     public RecipeType getRecipeType() {
         return recipeType;
     }
@@ -89,7 +89,7 @@ public class Recipe {
         this.recipeType = recipeType;
     }
 
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
     @JoinColumn(name = "process_id")
     public Process getProcess() {
         return process;

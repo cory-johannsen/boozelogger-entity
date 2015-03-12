@@ -20,7 +20,7 @@ public class FinishLogEntry extends LogEntry {
     private String color;
 
     public FinishLogEntry() {
-        this(null, null, null, null, null, null, null);
+        this(null, null, null, null, new Date(), null, null);
     }
 
     public FinishLogEntry(Long id, FinishLog finishLog, Double temperature, String notes, Date createdAt, String flavor, String color) {

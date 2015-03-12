@@ -3,14 +3,14 @@ BEGIN;
 CREATE TABLE IF NOT EXISTS recipe (
     id serial NOT NULL PRIMARY KEY,
     name text NOT NULL,
-    recipeType text NOT NULL,
+    recipe_type text NOT NULL,
     process_id integer,
     created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS recipe_component (
     id serial NOT NULL PRIMARY KEY,
-    recipe_id integer NOT NULL,
+    recipe_id integer,
     ingredient_id integer NOT NULL,
     amount numeric NOT NULL,
     unit text NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS ingredient (
 CREATE TABLE IF NOT EXISTS process (
     id serial NOT NULL PRIMARY KEY,
     name text NOT NULL,
-    recipe_id integer NOT NULL,
+    recipe_id integer,
     created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS process_step (
     id serial NOT NULL PRIMARY KEY,
     name text NOT NULL,
     description text,
-    process_id integer NOT NULL,
+    process_id integer,
     created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS ferment (
     id serial NOT NULL PRIMARY KEY,
     name text NOT NULL,
     description text,
-    recipe_id integer NOT NULL,
-    ferment_log_id integer NOT NULL,
+    recipe_id integer,
+    ferment_log_id integer,
     original_gravity numeric NOT NULL,
     temperature numeric NOT NULL,
     start_date timestamp with time zone DEFAULT now() NOT NULL,
@@ -54,8 +54,8 @@ CREATE TABLE IF NOT EXISTS distillation (
     id serial NOT NULL PRIMARY KEY,
     name text NOT NULL,
     description text,
-    ferment_id integer NOT NULL,
-    distillation_log_id integer NOT NULL,
+    ferment_id integer,
+    distillation_log_id integer,
     specific_gravity numeric NOT NULL,
     volume numeric NOT NULL,
     unit text NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS finish (
     name text NOT NULL,
     ferment_id integer NOT NULL,
     distillation_id integer,
-    finish_log_id integer NOT NULL,
+    finish_log_id integer,
     description text,
     volume numeric NOT NULL,
     unit text NOT NULL,
@@ -107,27 +107,27 @@ CREATE TABLE IF NOT EXISTS finish_vessel (
 CREATE TABLE IF NOT EXISTS ferment_log (
     id serial NOT NULL PRIMARY KEY,
     notes text,
-    vessel_id integer NOT NULL,
+    vessel_id integer,
     created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS distillation_log (
     id serial NOT NULL PRIMARY KEY,
     notes text,
-    vessel_id integer NOT NULL,
+    vessel_id integer,
     created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS finish_log (
     id serial NOT NULL PRIMARY KEY,
     notes text,
-    vessel_id integer NOT NULL,
+    vessel_id integer,
     created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS ferment_log_entry (
     id serial NOT NULL PRIMARY KEY,
-    ferment_log_id integer NOT NULL,
+    ferment_log_id integer,
     temperature numeric NOT NULL,
     notes text,
     specific_gravity numeric NOT NULL,
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS ferment_log_entry (
 
 CREATE TABLE IF NOT EXISTS distillation_log_entry (
     id serial NOT NULL PRIMARY KEY,
-    distillation_log_id integer NOT NULL,
+    distillation_log_id integer,
     temperature numeric NOT NULL,
     notes text,
     abv numeric NOT NULL,
@@ -147,8 +147,8 @@ CREATE TABLE IF NOT EXISTS distillation_log_entry (
 
 CREATE TABLE IF NOT EXISTS finish_log_entry (
     id serial NOT NULL PRIMARY KEY,
-    finish_log_id integer NOT NULL,
-    temperature numeric NOT NULL,
+    finish_log_id integer,
+    temperature numeric,
     notes text,
     flavor text NOT NULL,
     color text NOT NULL,
@@ -201,26 +201,3 @@ ALTER TABLE IF EXISTS finish_log_entry ADD CONSTRAINT finish_log_fk FOREIGN KEY 
 
 COMMIT;
 
-BEGIN;
-
-ALTER TABLE finish_log DROP CONSTRAINT finish_fk;
-
-ALTER TABLE ferment_log DROP CONSTRAINT ferment_fk;
-
-ALTER TABLE distillation_log DROP CONSTRAINT distillation_fk;
-
-ALTER TABLE finish_log DROP COLUMN finish_id;
-
-ALTER TABLE ferment_log DROP COLUMN ferment_id;
-
-ALTER TABLE distillation_log DROP COLUMN distillation_id;
-
-COMMIT;
-
-BEGIN;
-
-ALTER TABLE process DROP CONSTRAINT recipe_fk;
-
-ALTER TABLE process DROP COLUMN recipe_id;
-
-COMMIT;

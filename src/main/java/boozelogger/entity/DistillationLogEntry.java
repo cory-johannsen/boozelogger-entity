@@ -17,7 +17,7 @@ public class DistillationLogEntry extends LogEntry {
     private UnitOfMeasurement unit;
 
     public DistillationLogEntry() {
-        this(null, null, null, null, null, null, null);
+        this(null, null, null, new Date(), null, null, null);
     }
 
     public DistillationLogEntry(Long id, Double temperature, String notes, Date createdAt, Double abv, Double volume, UnitOfMeasurement unit) {

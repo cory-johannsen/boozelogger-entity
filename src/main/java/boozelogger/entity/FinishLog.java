@@ -29,6 +29,7 @@ public class FinishLog extends Log {
 
     @OneToMany
     @JoinColumn(name="finish_log_id")
+    @OrderBy("id ASC")
     public List<FinishLogEntry> getEntries() {
         return entries;
     }

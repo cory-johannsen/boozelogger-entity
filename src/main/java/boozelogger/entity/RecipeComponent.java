@@ -19,12 +19,12 @@ public class RecipeComponent {
     private Date createdAt;
 
     public RecipeComponent() {
-        this(null, null, null, null, null);
+        this(null, null, null, null, new Date());
     }
 
     public RecipeComponent(Ingredient ingredient, Double amount,
                            UnitOfMeasurement unit) {
-        this(null, ingredient, amount, unit, null);
+        this(null, ingredient, amount, unit, new Date());
     }
 
     public RecipeComponent(Long id, Ingredient ingredient, Double amount,
@@ -38,7 +38,6 @@ public class RecipeComponent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     public Long getId() {
         return id;
     }
