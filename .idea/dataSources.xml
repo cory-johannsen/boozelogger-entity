@@ -6,10 +6,7 @@
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/boozelogger</jdbc-url>
-      <user-name>boozelogger</user-name>
-      <user-password>dfc8dfc5dfc5dfd0dfcfdfc6dfc5dfcddfcddfcfdfd8</user-password>
       <libraries />
     </data-source>
   </component>
 </project>
-

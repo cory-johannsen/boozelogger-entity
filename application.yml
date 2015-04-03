@@ -6,7 +6,33 @@ service_version: 1.0.1
 spring:
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/boozelogger
-    driverClassName: org.postgresql.Driver
+    username: boozelogger
+    password: boozelogger
+
+---
+
+spring:
+  profiles: dev-local
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/boozelogger
+    username: boozelogger
+    password: boozelogger
+
+---
+
+spring:
+  profiles: dev-docker
+  datasource:
+    url: jdbc:postgresql://postgres:5432/boozelogger
+    username: boozelogger
+    password: boozelogger
+
+---
+
+spring:
+  profiles: production
+  datasource:
+    url: jdbc:postgresql://postgres:5432/boozelogger
     username: boozelogger
     password: boozelogger
 

@@ -1,14 +1,20 @@
 import java.util.regex.Pattern
 
+apply plugin: 'newrelic'
+
 buildscript {
     repositories {
         maven { url "https://repo.spring.io/libs-release" }
+        maven {
+            url "http://pdx-artifacts.datanerd.us/artifactory/repo"
+        }
         mavenLocal()
         mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.0.RELEASE")
         classpath('org.springframework:springloaded:1.2.0.RELEASE')
+        classpath 'com.newrelic.incubator:agent-gradle-plugin:0.0.2'
     }
 }
 
@@ -37,7 +43,8 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-actuator'
     compile 'org.yaml:snakeyaml:1.13'
     compile 'com.fasterxml.jackson.core:jackson-databind'
-    compile 'org.postgresql:postgresql:9.3-1102-jdbc41'
+    compile 'org.apache.tomcat:tomcat-jdbc:7.0.28'
+    compile 'org.postgresql:postgresql:9.4-1200-jdbc41'
     compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
     compile 'ch.qos.logback:logback-classic:1.1.2'
 
@@ -49,6 +56,21 @@ dependencies {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
+}
+
+configurations {
+    provided
+    agent
+}
+
+// Set the version of the agent you desire here.  The plugin will add the bit necessary so that gradle run launches with
+// the agent as well as the start script that gets bundled in your releases.  Simply make sure your newrelic config
+// exists at conf/newrelic.yml.
+useNewRelic version: '3.12.0'
+
+task docker_build << {
+    "docker build --rm -t quay.io/cory_johannsen/boozelogger-entity .".execute().waitForProcessOutput(System.out, System.err)
+    "docker tag -f quay.io/cory_johannsen/boozelogger-entity:latest quay.io/cory_johannsen/boozelogger-entity".execute().waitForProcessOutput(System.out, System.err)
 }
 
 task incrementVersion << {

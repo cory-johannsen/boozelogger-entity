@@ -1,10 +1,7 @@
 package boozelogger.entity;
 
 import javax.persistence.*;
-import java.lang.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * User: cjohannsen
@@ -15,26 +12,26 @@ import java.util.List;
 @Table(name="recipe")
 public class Recipe {
 
-    private Integer id;
+    private Long id;
     private String name;
     private RecipeType recipeType;
     private Date createdAt;
-    private List<RecipeComponent> components;
+    private Set<RecipeComponent> components;
     private Process process;
 
     public Recipe() {
-        this(null, null, null, null, new ArrayList<RecipeComponent>(), null);
+        this(null, null, null, new Date(), new HashSet<RecipeComponent>(), new Process());
     }
 
     public Recipe(String name, RecipeType recipeType) {
-        this(null, name, recipeType, null, null, null);
+        this(null, name, recipeType, new Date(), new HashSet<RecipeComponent>(), new Process(name));
     }
 
-    public Recipe(String name, RecipeType recipeType, List<RecipeComponent> components, Process process) {
-        this(null, name, recipeType, null, components, process);
+    public Recipe(String name, RecipeType recipeType, Set<RecipeComponent> components, Process process) {
+        this(null, name, recipeType, new Date(), components, process);
     }
 
-    public Recipe(Integer id, String name, RecipeType recipeType, Date createdAt, List<RecipeComponent> components, Process process) {
+    public Recipe(Long id, String name, RecipeType recipeType, Date createdAt, Set<RecipeComponent> components, Process process) {
         this.id = id;
         this.name = name;
         this.recipeType = recipeType;
@@ -45,11 +42,11 @@ public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -72,18 +69,18 @@ public class Recipe {
         this.createdAt = createdAt;
     }
 
-    @OneToMany(fetch=FetchType.EAGER)
+    @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
     @JoinColumn(name = "recipe_id")
-    public List<RecipeComponent> getComponents() {
+    public Set<RecipeComponent> getComponents() {
         return components;
     }
 
-    public void setComponents(List<RecipeComponent> components) {
+    public void setComponents(Set<RecipeComponent> components) {
         this.components = components;
     }
 
     @Enumerated(EnumType.STRING)
-    @Column(name="recipeType")
+    @Column(name="recipe_type")
     public RecipeType getRecipeType() {
         return recipeType;
     }
@@ -92,7 +89,7 @@ public class Recipe {
         this.recipeType = recipeType;
     }
 
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
     @JoinColumn(name = "process_id")
     public Process getProcess() {
         return process;

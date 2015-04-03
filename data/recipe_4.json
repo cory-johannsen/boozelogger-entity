@@ -1,0 +1,16 @@
+{
+  "name" : "Scottish Malt Whiskey",
+  "recipeType" : "WHISKEY_WORT",
+  "createdAt" : "2015-03-11T04:51:25.735+0000",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:9000/recipe/4"
+    },
+    "components" : {
+      "href" : "http://localhost:9000/recipe/4/components"
+    },
+    "process" : {
+      "href" : "http://localhost:9000/recipe/4/process"
+    }
+  }
+}

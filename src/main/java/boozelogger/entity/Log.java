@@ -12,16 +12,16 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Log {
 
-    private Integer id;
+    private Long id;
     private String notes;
     private Vessel vessel;
     private Date createdAt;
 
     public Log() {
-        this(null, null, null, null);
+        this(null, null, null, new Date());
     }
 
-    public Log(Integer id, String notes, Vessel vessel, Date createdAt) {
+    public Log(Long id, String notes, Vessel vessel, Date createdAt) {
         this.id = id;
         this.notes = notes;
         this.vessel = vessel;
@@ -30,11 +30,11 @@ public abstract class Log {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

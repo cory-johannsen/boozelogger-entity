@@ -13,7 +13,7 @@ import java.util.Date;
 @Table(name="vessel")
 public class Vessel {
 
-    private Integer id;
+    private Long id;
     private String name;
     private String description;
     private Double volume;
@@ -21,10 +21,10 @@ public class Vessel {
     private Date createdAt;
 
     public Vessel() {
-        this(null, null, null, null, null, null);
+        this(null, null, null, null, null, new Date());
     }
 
-    public Vessel(Integer id, String name, String description, Double volume, UnitOfMeasurement unit, Date createdAt) {
+    public Vessel(Long id, String name, String description, Double volume, UnitOfMeasurement unit, Date createdAt) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -35,17 +35,15 @@ public class Vessel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Column(name="name")
-
     public String getName() {
         return name;
     }
@@ -55,7 +53,6 @@ public class Vessel {
     }
 
     @Column(name="description")
-
     public String getDescription() {
         return description;
     }
@@ -65,7 +62,6 @@ public class Vessel {
     }
 
     @Column(name="volume", columnDefinition = "numeric")
-
     public Double getVolume() {
         return volume;
     }
@@ -76,7 +72,6 @@ public class Vessel {
 
     @Enumerated(EnumType.STRING)
     @Column(name="unit")
-
     public UnitOfMeasurement getUnit() {
         return unit;
     }
@@ -87,7 +82,6 @@ public class Vessel {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="created_at")
-
     public Date getCreatedAt() {
         return createdAt;
     }
